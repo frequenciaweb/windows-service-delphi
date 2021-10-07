@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7F9CA0C2-E4EF-489C-B1F4-BA512079F5F6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="windowsService\ws_delphi.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="appTeste\appTeste.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ws_delphi">
+        <MSBuild Projects="windowsService\ws_delphi.dproj"/>
+    </Target>
+    <Target Name="ws_delphi:Clean">
+        <MSBuild Projects="windowsService\ws_delphi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ws_delphi:Make">
+        <MSBuild Projects="windowsService\ws_delphi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="appTeste">
+        <MSBuild Projects="appTeste\appTeste.dproj"/>
+    </Target>
+    <Target Name="appTeste:Clean">
+        <MSBuild Projects="appTeste\appTeste.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="appTeste:Make">
+        <MSBuild Projects="appTeste\appTeste.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ws_delphi;appTeste"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ws_delphi:Clean;appTeste:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ws_delphi:Make;appTeste:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
